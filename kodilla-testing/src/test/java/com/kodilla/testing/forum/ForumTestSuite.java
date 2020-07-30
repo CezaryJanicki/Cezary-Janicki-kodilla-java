@@ -3,11 +3,11 @@ import com.kodilla.testing.user.SimpleUser;
 import org.junit.*;
 public class ForumTestSuite {
     @Before
-    public void before(){
+    public void before() {
         System.out.println("Test Case: begin");
     }
     @After
-    public void after(){
+    public void after() {
         System.out.println("Test Case: end");
     }
     @BeforeClass
@@ -19,7 +19,7 @@ public class ForumTestSuite {
         System.out.println("Test Suite: end");
     }
     @Test
-    public void testCaseUsername(){
+    public void testCaseUsername() {
         //Given
         SimpleUser simpleUser = new SimpleUser("theForumUser", "John Smith");
         //When
@@ -29,7 +29,7 @@ public class ForumTestSuite {
         Assert.assertEquals("theForumUser", result);
     }
     @Test
-    public void testCaseRealName(){
+    public void testCaseRealName() {
         //Given
         SimpleUser simpleUser = new SimpleUser("theForumUser", "John Smith");
         //When

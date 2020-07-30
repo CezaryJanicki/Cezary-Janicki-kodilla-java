@@ -30,30 +30,30 @@ public class CollectionTestSuite {
     @Test
     public void testOddNumbersExterminatorEmptyList() {
         //Given
-        ArrayList<Integer> testList = new ArrayList<>();
+        ArrayList<Integer> numbers = new ArrayList<>();
         OddNumbersExterminator oddNumbersExterminatorTest = new OddNumbersExterminator();
         //When
-        List<Integer> testedList = oddNumbersExterminatorTest.exterminate(testList);
+        List<Integer> expectedList = oddNumbersExterminatorTest.exterminate(numbers);
         //Then
-        Assert.assertTrue(testedList.isEmpty());
+        Assert.assertTrue(expectedList.isEmpty());
     }
 
     @Test
     public void testOddNumbersExterminatorFullList() {
         //Given
-        ArrayList<Integer> testList = new ArrayList<>();
-        testList.add(1);
-        testList.add(2);
-        testList.add(3);
-        testList.add(4);
-        testList.add(5);
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(5);
         OddNumbersExterminator oddNumbersExterminatorTest = new OddNumbersExterminator();
         ArrayList<Integer> evenList = new ArrayList<>();
         evenList.add(2);
         evenList.add(4);
         //When
-        List<Integer> testedList = oddNumbersExterminatorTest.exterminate(testList);
+        List<Integer> expectedList = oddNumbersExterminatorTest.exterminate(numbers);
         //Then
-        Assert.assertEquals(evenList, testedList);
+        Assert.assertEquals(evenList, expectedList);
     }
 }
