@@ -1,6 +1,15 @@
 package com.kodilla.testing.shape;
 
+import com.kodilla.testing.shape.Circle;
+import com.kodilla.testing.shape.Shape;
+import com.kodilla.testing.shape.Square;
+import com.kodilla.testing.shape.Triangle;
+import com.kodilla.testing.shape.ShapeCollector;
+
+import org.hamcrest.CoreMatchers;
 import org.junit.*;
+
+import java.util.ArrayList;
 
 //Test suite for classes of Forum
 public class ShapeCollectorTestSuite {
@@ -26,28 +35,25 @@ public class ShapeCollectorTestSuite {
     public void testAddFigure() {
         //Given
         ShapeCollector shapeList = new ShapeCollector();
-        Shape addedFigure = new Circle (2);
         //When
+        Shape addedFigure = new Circle (2);
         shapeList.addFigure(addedFigure);
         //Then
         Assert.assertEquals(1, shapeList.size());
-        Assert.assertEquals(addedFigure, shapeList.getFigure(0));
+        Assert.assertEquals(new Circle(2), shapeList.getFigure(0));
     }
 
     @Test
     public void testGetFigure() {
         //Given
-        ShapeCollector shapeCollector = new ShapeCollector();
-        Shape circle = new Circle(3);
-        Shape square = new Square(3);
-        Shape triangle = new Triangle(2,2);
-        shapeCollector.addFigure(circle);
-        shapeCollector.addFigure(square);
-        shapeCollector.addFigure(triangle);
-        //Expect
-        Assert.assertEquals(triangle, shapeCollector.getFigure(2));
+        ShapeCollector shapeList = new ShapeCollector();
+        //When
+        shapeList.addFigure(new Circle(3));
+        shapeList.addFigure(new Square(3));
+        shapeList.addFigure(new Triangle(2,2));
+        //Then
+        Assert.assertEquals(new Triangle(2,2), shapeList.getFigure(2));
     }
-
     @Test
     public void testRemoveFigureNotExisting() {
         //Given
@@ -60,7 +66,6 @@ public class ShapeCollectorTestSuite {
         //Then
         Assert.assertFalse(result);
     }
-
     @Test
     public void testRemoveFigure() {
         //Given
@@ -73,7 +78,6 @@ public class ShapeCollectorTestSuite {
         Assert.assertTrue(result);
         Assert.assertEquals(0, shapeList.size());
     }
-
     @Test
     public void testRemoveFigureTwoFigures() {
         //Given
@@ -89,7 +93,6 @@ public class ShapeCollectorTestSuite {
         Assert.assertEquals(1, shapeList.size());
         Assert.assertEquals(circle, shapeList.getFigure(0));
     }
-
     @Test
     public void testShowFigures() {
         //Given
@@ -99,6 +102,9 @@ public class ShapeCollectorTestSuite {
         shapeList.addFigure(triangle);
         shapeList.addFigure(triangle);
         //When
+        int expectedResult = shapeList.size();
+        //Then
+        Assert.assertEquals(3, expectedResult);
         shapeList.showFigures();
     }
 }
