@@ -8,7 +8,7 @@ public class ExceptionHandling {
         } catch (Exception e) {
             System.out.println("I have found the exception " + e + " and handled it!");
         } finally {
-            System.out.println("What was the exception?");
+            System.out.println("Thank you. Goodbye.");
         }
     }
 }
