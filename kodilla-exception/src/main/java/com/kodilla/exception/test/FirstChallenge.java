@@ -5,7 +5,7 @@ import java.lang.ArithmeticException;
 public class FirstChallenge {
 
     public double divide(double a, double b) throws ArithmeticException {
-        if(b == 0){
+        if(b == 0) {
             throw new ArithmeticException();
         }
         return a / b;
@@ -25,7 +25,7 @@ public class FirstChallenge {
         } catch (ArithmeticException e) {
             System.out.println("I have found the error - " + e);
         } finally {
-            System.out.println("I am still looking for errors...");
+            System.out.println("Thank you. Goodbye.");
         }
     }
 }
