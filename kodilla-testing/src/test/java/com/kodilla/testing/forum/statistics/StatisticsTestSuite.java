@@ -26,15 +26,20 @@ public class StatisticsTestSuite {
         System.out.println("SUT Class Suit test completed");
     }
 
+    public static List<String> userArray(int noOfUsers) {
+        List<String> users = new ArrayList<>();
+        for (int i = 0; i < noOfUsers; i++) {
+            users.add("Forum user no " + i);
+        }
+        return users;
+    }
+
     @Test
     public void testZeroPosts() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        List<String> users = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            users.add("Forum user no " + i);
-        }
+        List<String> users = userArray(10);
         int postsNumber = 0;
         int commentsNumber = 10;
 
@@ -64,10 +69,7 @@ public class StatisticsTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        List<String> users = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            users.add("Forum user no " + i);
-        }
+        List<String> users = userArray(10);
         int postsNumber = 1000;
         int commentsNumber = 10;
 
@@ -97,10 +99,7 @@ public class StatisticsTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        List<String> users = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            users.add("Forum user no " + i);
-        }
+        List<String> users = userArray(10);
         int postsNumber = 1000;
         int commentsNumber = 0;
 
@@ -130,10 +129,7 @@ public class StatisticsTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        List<String> users = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            users.add("Forum user no " + i);
-        }
+        List<String> users = userArray(10);
         int postsNumber = 20;
         int commentsNumber = 10;
 
@@ -163,10 +159,7 @@ public class StatisticsTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        List<String> users = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            users.add("Forum user no " + i);
-        }
+        List<String> users = userArray(10);
         int postsNumber = 10;
         int commentsNumber = 20;
 
@@ -196,8 +189,8 @@ public class StatisticsTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        List<String> users = new ArrayList<>();
-
+        //List<String> users = new ArrayList<>();
+        List<String> users = userArray(0);
         int postsNumber = 10;
         int commentsNumber = 20;
 
@@ -227,11 +220,7 @@ public class StatisticsTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        List<String> users = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            users.add("User no: " + i);
-        }
-
+        List<String> users = userArray(100);
         int postsNumber = 10;
         int commentsNumber = 20;
 
@@ -250,8 +239,8 @@ public class StatisticsTestSuite {
 
         //Then
         Assert.assertEquals(100, usersCount);
-        Assert.assertEquals(0.1, averagePostsPerUser, 0.1);
-        Assert.assertEquals(0.2, averageCommentsPerUser, 0.1);
+        Assert.assertEquals(0.1, averagePostsPerUser, 0.01);
+        Assert.assertEquals(0.2, averageCommentsPerUser, 0.01);
         Assert.assertEquals(2, averageCommentsPerPost, 0.001);
         statisticsCalculator.showStatistics();
     }
