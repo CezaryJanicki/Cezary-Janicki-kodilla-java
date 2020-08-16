@@ -26,7 +26,7 @@ public class StatisticsTestSuite {
         System.out.println("SUT Class Suit test completed");
     }
 
-    public static List<String> userArray(int noOfUsers) {
+    private static List<String> generateUsers(int noOfUsers) {
         List<String> users = new ArrayList<>();
         for (int i = 0; i < noOfUsers; i++) {
             users.add("Forum user no " + i);
@@ -39,7 +39,7 @@ public class StatisticsTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        List<String> users = userArray(10);
+        List<String> users = generateUsers(10);
         int postsNumber = 0;
         int commentsNumber = 10;
 
@@ -69,7 +69,7 @@ public class StatisticsTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        List<String> users = userArray(10);
+        List<String> users = generateUsers(10);
         int postsNumber = 1000;
         int commentsNumber = 10;
 
@@ -99,7 +99,7 @@ public class StatisticsTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        List<String> users = userArray(10);
+        List<String> users = generateUsers(10);
         int postsNumber = 1000;
         int commentsNumber = 0;
 
@@ -129,7 +129,7 @@ public class StatisticsTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        List<String> users = userArray(10);
+        List<String> users = generateUsers(10);
         int postsNumber = 20;
         int commentsNumber = 10;
 
@@ -159,7 +159,7 @@ public class StatisticsTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        List<String> users = userArray(10);
+        List<String> users = generateUsers(10);
         int postsNumber = 10;
         int commentsNumber = 20;
 
@@ -190,7 +190,7 @@ public class StatisticsTestSuite {
         Statistics statisticsMock = mock(Statistics.class);
 
         //List<String> users = new ArrayList<>();
-        List<String> users = userArray(0);
+        List<String> users = generateUsers(0);
         int postsNumber = 10;
         int commentsNumber = 20;
 
@@ -220,7 +220,7 @@ public class StatisticsTestSuite {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
-        List<String> users = userArray(100);
+        List<String> users = generateUsers(100);
         int postsNumber = 10;
         int commentsNumber = 20;
 
