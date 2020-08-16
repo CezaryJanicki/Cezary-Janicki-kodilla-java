@@ -1,0 +1,47 @@
+ @Test
+    public void libraryUserWithZeroBooks() {
+        //Given
+        LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
+        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+        List<Book> resultListOfZeroBooks = generateListOfNBooks(0);
+        LibraryUser libraryUser = new LibraryUser("Cezary", "Janicki", "8008221540");
+        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListOfZeroBooks);
+
+        //When
+        List<Book> usersBooks = bookLibrary.listBooksInHandsOf(libraryUser);
+
+        //Then
+        assertEquals(0, usersBooks.size());
+    }
+
+    @Test
+    public void libraryUserWithOneBook() {
+        //Given
+        LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
+        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+        List<Book> resultListOfOneBook = generateListOfNBooks(1);
+        LibraryUser libraryUser = new LibraryUser("Cezary", "Janicki", "8008221540");
+        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListOfOneBook);
+
+        //When
+        List<Book> usersBooks = bookLibrary.listBooksInHandsOf(libraryUser);
+
+        //Then
+        assertEquals(1, usersBooks.size());
+    }
+
+    @Test
+    public void libraryUserWithFiveBook() {
+        //Given
+        LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
+        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+        List<Book> resultListOfOneBook = generateListOfNBooks(5);
+        LibraryUser libraryUser = new LibraryUser("Cezary", "Janicki", "8008221540");
+        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListOfOneBook);
+
+        //When
+        List<Book> usersBooks = bookLibrary.listBooksInHandsOf(libraryUser);
+
+        //Then
+        assertEquals(5, usersBooks.size());
+    }

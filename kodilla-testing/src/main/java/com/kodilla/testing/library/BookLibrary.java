@@ -19,4 +19,11 @@ public class BookLibrary {
         bookList = resultList;
         return bookList;
     }
+
+    public List<Book> listBooksInHandsOf(LibraryUser libraryUser) {
+        List<Book> bookList = new ArrayList<Book>();
+        bookList.add(new Book("Putting Mark", "Anthony Jones", 1980));
+        bookList.add(new Book("Mistery Book", "Zuckie Barnoble", 1648));
+        return bookList;
+    }
 }
