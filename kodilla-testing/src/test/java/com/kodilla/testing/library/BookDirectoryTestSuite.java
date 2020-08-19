@@ -139,4 +139,23 @@ public class BookDirectoryTestSuite {
         //Then
         assertEquals(5, usersBooks.size());
     }
+
+    @Test
+    public void testGetSpecificData() {
+        //Given
+        LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
+        BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
+        List<Book> resultListOfFiveBooks = generateListOfNBooks(5);
+        LibraryUser libraryUser = new LibraryUser("Cezary", "Janicki", "8008221540");
+        Book resultListOfBookNo0 = resultListOfFiveBooks.get(0);
+        Book resultListOfBookNo5 = resultListOfFiveBooks.get(resultListOfFiveBooks.size()-1);
+        when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListOfFiveBooks);
+
+        //When
+        List<Book> usersBooks = bookLibrary.listBooksInHandsOf(libraryUser);
+
+        //Then
+        assertEquals(resultListOfBookNo0, usersBooks.get(0));
+        assertEquals(resultListOfBookNo5, usersBooks.get(usersBooks.size()-1));
+    }
 }
