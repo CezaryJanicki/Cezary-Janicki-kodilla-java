@@ -1,57 +1,65 @@
 package com.kodilla.stream;
 
-import com.kodilla.stream.beautifier.PoemBeautifier;
-import com.kodilla.stream.beautifier.PoemDecorator;
-import com.kodilla.stream.lambda.*;
-import com.kodilla.stream.reference.FunctionalCalculator;
+import com.kodilla.stream.book.Book;
+import com.kodilla.stream.book.BookDirectory;
+import com.kodilla.stream.person.People;
 
-import java.sql.SQLOutput;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StreamMain {
     public static void main(String[] args) {
+        People.getList().stream()
+                .forEach(System.out::println);
 
-        //solution 1 - OOP
-        //SaySomething saySomething = new SaySomething();
-        //saySomething.say();
+        People.getList().stream()
+                .map(s -> s.toUpperCase())
+                .forEach(System.out::println);
 
-        //solution 2 - interface
-        Processor processor = new Processor();
-        //ExecuteSaySomething executeSaySomething = new ExecuteSaySomething();
-        //processor.execute(executeSaySomething);
+        People.getList().stream()
+                .map(String::toUpperCase)
+                .forEach(s -> System.out.println(s));
 
-        //solution 3 - function
-        Executor codeToExecute = () -> System.out.println("This is an example text.");
-        //processor.execute(codeToExecute);
-        //solution 3a - shorter version
-        processor.execute(() -> System.out.println("This is an example text."));
+        People.getList().stream()
+                .filter(s -> s.length() > 11)
+                .forEach(System.out::println);
 
-        ExpressionExecutor expressionExecutor = new ExpressionExecutor();
+        People.getList().stream()
+                .map(String::toUpperCase)
+                .filter(s -> s.length() > 11)
+                .map(s -> s.substring(0, s.indexOf(' ') + 2) + ".")
+                .filter(s -> s.substring(0, 1).equals("M"))
+                .forEach(System.out::println);
 
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a + b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a - b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a * b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a / b);
+        BookDirectory theBookDirectory = new BookDirectory();
+        theBookDirectory.getList().stream()
+                .filter(book -> book.getYearOfPublication() > 2005)
+                .forEach(System.out::println);
 
-        //by referencing methods
-        System.out.println("Calculating expressions with method references");
-        expressionExecutor.executeExpression(3, 4, FunctionalCalculator::multiplyAByB);
-        expressionExecutor.executeExpression(3, 4, FunctionalCalculator::addAToB);
-        expressionExecutor.executeExpression(3, 4, FunctionalCalculator::subBFromA);
-        expressionExecutor.executeExpression(3, 4, FunctionalCalculator::divideAByB);
+        List<Book> theResultListOfBooks = theBookDirectory.getList().stream()
+                .filter(book -> book.getYearOfPublication() > 2005)
+                .collect(Collectors.toList());
 
-        PoemBeautifier poemBeautifier = new PoemBeautifier();
-        String poem = " Tiger, tiger, burning bright \n in the forests of the night \n what immortal had or eye \n oule frame thy fearful symmetry?";
+        System.out.println("# elements: " + theResultListOfBooks.size());
+        theResultListOfBooks.stream()
+                .forEach(System.out::println);
 
-        poemBeautifier.beautify(poem, (a) -> a.toUpperCase());
-        poemBeautifier.beautify(poem, (a) -> "ABC " + a + " DEF");
-        poemBeautifier.beautify(poem, (a) -> a.toLowerCase());
-        poemBeautifier.beautify(poem, (a) -> {
-            String newText = "";
-            for (int i = 0; i < a.length(); i++) {
-                newText = newText  + "\n" + a.charAt(i);
-            } return newText;
-        });
+        Map<String, Book> theResultMapOfBooks = theBookDirectory.getList().stream()
+                .filter(book -> book.getYearOfPublication() > 2005)
+                .collect(Collectors.toMap(Book::getSignature, book -> book));
 
-        System.out.println("Original version \n" + poem);
+        System.out.println("# elements: " + theResultMapOfBooks.size());
+        theResultMapOfBooks.entrySet().stream()
+                .map(entry -> entry.getKey() + ": " + entry.getValue())
+                .forEach(System.out::println);
+
+        String theResultStringOfBooks = theBookDirectory.getList().stream()
+                .filter(book -> book.getYearOfPublication() > 2005)
+                .map(Book::toString)
+                .collect(Collectors.joining(",\n","<<",">>"));
+
+        System.out.println(theResultStringOfBooks);
+
     }
 }
