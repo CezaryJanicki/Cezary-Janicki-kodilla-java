@@ -1,6 +1,7 @@
 package com.kodilla.testing.library;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BookLibrary {
@@ -11,19 +12,14 @@ public class BookLibrary {
     }
 
     public List<Book> listBooksWithCondition(String titleFragment) {
-        List<Book> bookList = new ArrayList<Book>();
-        if (titleFragment.length() < 3) return bookList;
+        if (titleFragment.length() < 3) return Collections.emptyList();
         List<Book> resultList = libraryDatabase
                 .listBooksWithCondition(titleFragment);
-        if (resultList.size() > 20) return bookList;
-        bookList = resultList;
-        return bookList;
+        if (resultList.size() > 20) return Collections.emptyList();
+        return resultList;
     }
 
     public List<Book> listBooksInHandsOf(LibraryUser libraryUser) {
-        List<Book> bookList = new ArrayList<Book>();
-        bookList.add(new Book("Putting Mark", "Anthony Jones", 1980));
-        bookList.add(new Book("Mistery Book", "Zuckie Barnoble", 1648));
-        return bookList;
+        return libraryDatabase.listBooksInHandsOf(libraryUser);
     }
 }

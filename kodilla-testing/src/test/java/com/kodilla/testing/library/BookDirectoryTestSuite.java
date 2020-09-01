@@ -147,17 +147,15 @@ public class BookDirectoryTestSuite {
         BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
         List<Book> resultListOfFiveBooks = generateListOfNBooks(5);
         LibraryUser libraryUser = new LibraryUser("Cezary", "Janicki", "8008221540");
-        Book expectedResultListOfBookNo0 = resultListOfFiveBooks.get(0);
-        Book expectedResultListOfBookNo5 = resultListOfFiveBooks.get(resultListOfFiveBooks.size()-1);
+        //Book expectedResultListOfBookNo0 = resultListOfFiveBooks.get(0);
+        //Book expectedResultListOfBookNo5 = resultListOfFiveBooks.get(resultListOfFiveBooks.size()-1);
         when(libraryDatabaseMock.listBooksInHandsOf(libraryUser)).thenReturn(resultListOfFiveBooks);
 
         //When
         List<Book> usersBooks = bookLibrary.listBooksInHandsOf(libraryUser);
-        Book resultListOfBookNo0 = usersBooks.get(0);
-        Book resultListOfBookNo5 =  usersBooks.get(usersBooks.size() - 1);
 
         //Then
-        assertEquals(expectedResultListOfBookNo0, resultListOfBookNo0);
-        assertEquals(expectedResultListOfBookNo5, resultListOfBookNo5);
+        assertEquals(resultListOfFiveBooks, usersBooks);
+
     }
 }
