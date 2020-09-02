@@ -4,6 +4,7 @@ import com.kodilla.stream.forumuser.Forum;
 import com.kodilla.stream.forumuser.ForumUser;
 
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class StreamMain {
@@ -15,7 +16,7 @@ public class StreamMain {
                 .filter(ForumUser -> ForumUser.getGender() == 'M')
                 .filter(ForumUser -> ForumUser.getYear() <= 2000)
                 .filter(ForumUser -> ForumUser.getNoOfPosts() >= 1)
-                .collect(Collectors.toMap(ForumUser::getUserIndividualNumber, ForumUser -> ForumUser));
+                .collect(Collectors.toMap(ForumUser::getUserIndividualNumber, Function.identity()));
 
         System.out.println("Number of elements in the original forumStream equals: " + forumStream.getUserList().size());
         System.out.println("Number of elements in the map equals: " + usersByIndividualNumber.size());
