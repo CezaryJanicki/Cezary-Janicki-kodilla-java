@@ -23,9 +23,9 @@ public class StreamMain {
             } return newText;
         });
 
-        poemBeautifier.beautify(poem, FunctionalBeautifier::beautifyToUpperCase);
+        poemBeautifier.beautify(poem, String::toUpperCase);
         poemBeautifier.beautify(poem, FunctionalBeautifier::beautifyBeginningAndAnd);
-        poemBeautifier.beautify(poem, FunctionalBeautifier::beautifyToLowerCase);
+        poemBeautifier.beautify(poem, String::toUpperCase);
         poemBeautifier.beautify(poem, FunctionalBeautifier::beautifyDoubleSpace);
 
         System.out.println("Original version \n" + poem);
