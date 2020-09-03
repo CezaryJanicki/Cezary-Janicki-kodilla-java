@@ -1,7 +1,9 @@
 package com.kodilla.stream;
 
+import com.kodilla.stream.beautifier.PoemBeautifier;
 import com.kodilla.stream.forumuser.Forum;
 import com.kodilla.stream.forumuser.ForumUser;
+import com.kodilla.stream.reference.FunctionalBeautifier;
 
 import java.time.LocalDate;
 import java.util.Map;
