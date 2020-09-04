@@ -14,10 +14,7 @@ public class WorldTestSuite {
         Country india = new Country(new BigDecimal("1370000000"));
         Country unitedStates = new Country(new BigDecimal("330122000"));
         Country brazil = new Country(new BigDecimal("211913000"));
-        Country nigeria = new Country(new BigDecimal("206140000"));
         Country mexico = new Country(new BigDecimal("128933000"));
-        Country ethiopia = new Country(new BigDecimal("122032000"));
-        Country egypt = new Country(new BigDecimal("99388000"));
         Country colombia = new Country(new BigDecimal("50374000"));
 
         Continent northAmerica = new Continent();
@@ -32,20 +29,14 @@ public class WorldTestSuite {
         southAmerica.addCountry(brazil);
         southAmerica.addCountry(colombia);
 
-        Continent africa = new Continent();
-        africa.addCountry(nigeria);
-        africa.addCountry(ethiopia);
-        africa.addCountry(egypt);
-
         World world = new World();
         world.addContinent(northAmerica);
         world.addContinent(asia);
         world.addContinent(southAmerica);
-        world.addContinent(africa);
 
         //When
         BigDecimal result = world.getPeopleQuantity();
         //Then
-        Assert.assertEquals(new BigDecimal("3958902000"), result);
+        Assert.assertEquals(new BigDecimal("3531342000"), result);
     }
 }

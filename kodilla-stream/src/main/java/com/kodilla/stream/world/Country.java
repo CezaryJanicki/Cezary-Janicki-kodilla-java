@@ -16,7 +16,7 @@ public final class Country {
                 '}';
     }
 
-    BigDecimal getPeopleQuantity() {
+    public BigDecimal getPeopleQuantity() {
         return population;
     }
 }
