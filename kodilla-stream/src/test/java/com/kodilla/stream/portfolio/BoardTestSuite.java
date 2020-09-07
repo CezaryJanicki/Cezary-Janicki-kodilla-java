@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -147,14 +148,12 @@ public class BoardTestSuite {
         Board project = prepareTestData();
 
         //When
-        List<TaskList> inProgressTasks = new ArrayList<>();
-        inProgressTasks.add(new TaskList("In progress"));
         double averageWorkingOnTask = project.getTaskLists().stream()
-                .filter(inProgressTasks::contains)
-                .flatMap(n -> n.getTasks().stream())
+                .filter(line -> "In progress".equals(line.getName()))
+                .flatMap(tasks -> tasks.getTasks().stream())
                 .mapToInt(n -> Period.between(n.getCreated(), LocalDate.now()).getDays())
                 .average()
-                .getAsDouble();
+                .orElse(0.0);
 
         //Then
         Assert.assertEquals(averageWorkingOnTask, 10.00, 0.01);
