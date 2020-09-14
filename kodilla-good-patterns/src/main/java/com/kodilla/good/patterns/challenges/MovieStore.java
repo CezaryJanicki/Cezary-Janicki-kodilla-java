@@ -34,7 +34,6 @@ public final class MovieStore {
         MovieStore cezaryStore = new MovieStore();
         String text = cezaryStore.getMovies().entrySet().stream()
                 .flatMap(stringListEntry -> stringListEntry.getValue().stream())
-                .map(list -> list.toString())
                 .collect(Collectors.joining("!"));
         System.out.println(text);
     }
