@@ -5,18 +5,17 @@ import java.util.Map;
 
 public class SearchEngine {
 
-    public void findFlight(Flight flight) throws RouteNotFoundException {
+    public boolean findFlight(Flight flight) throws RouteNotFoundException {
 
-    Map<String, Boolean> airportList = new HashMap<String,Boolean>();
-        airportList.put("Moscow", true);
-        airportList.put("Warsaw", false);
+    Map<String, Boolean> arrivalAirportAvailable = new HashMap<String,Boolean>();
+        arrivalAirportAvailable.put("Moscow", true);
+        arrivalAirportAvailable.put("Warsaw", false);
 
-        for (Map.Entry<String, Boolean> entry : airportList.entrySet()) {
-            if (flight.getDepartureAirport().equals(entry.getKey())) {
-                System.out.println("The airport " + entry.toString() + " has been found in the database.");
-            } else {
-                throw new RouteNotFoundException("The route from " + flight + " has not been found.");
-            }
+        Boolean flightAvailable = arrivalAirportAvailable.get(flight.getArrivalAirport());
+
+        if (flightAvailable == null) {
+            throw new RouteNotFoundException("The route from " + flight + " has not been found.");
         }
+        return flightAvailable;
     }
 }
