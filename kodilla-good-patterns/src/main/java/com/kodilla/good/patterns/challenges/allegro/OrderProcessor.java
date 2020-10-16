@@ -1,9 +1,9 @@
 package com.kodilla.good.patterns.challenges.allegro;
 
 public class OrderProcessor {
-    private InformationService informationService;
-    private OrderService orderService;
-    private OrderRepository orderRepository;
+    private final InformationService informationService;
+    private final OrderService orderService;
+    private final OrderRepository orderRepository;
 
     public OrderProcessor(final InformationService informationService,
                            final OrderService orderService,
@@ -24,5 +24,6 @@ public class OrderProcessor {
         } else {
             return new OrderDto(orderRequest.getUser(), orderRequest.getProduct(), false);
         }
+
     }
 }

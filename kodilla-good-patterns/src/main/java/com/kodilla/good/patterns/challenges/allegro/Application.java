@@ -7,7 +7,6 @@ public class Application {
         OrderRequest orderRequest = orderRequestRetriever.retrieve();
 
         OrderProcessor orderProcessor = new OrderProcessor(new InformationService(), new OrderService(), new OrderRepository());
-        //OrderDto orderDto = new OrderDto();
         orderProcessor.process(orderRequest);
     }
 }

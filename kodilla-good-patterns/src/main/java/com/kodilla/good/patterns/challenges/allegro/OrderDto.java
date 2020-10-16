@@ -2,14 +2,14 @@ package com.kodilla.good.patterns.challenges.allegro;
 
 
 public class OrderDto {
-    public User user;
-    public Product product;
-    public boolean isRented;
+    private final User user;
+    private final Product product;
+    private final boolean isOrdered;
 
-    public OrderDto (final User user, final Product product, final boolean isRented) {
+    public OrderDto (final User user, final Product product, final boolean isOrdered) {
         this.user = user;
         this.product = product;
-        this.isRented = isRented;
+        this.isOrdered = isOrdered;
     }
 
     public User getUser() {
@@ -20,7 +20,7 @@ public class OrderDto {
         return product;
     }
 
-    public boolean isRented() {
-        return isRented;
+    public boolean isOrdered() {
+        return isOrdered;
     }
 }

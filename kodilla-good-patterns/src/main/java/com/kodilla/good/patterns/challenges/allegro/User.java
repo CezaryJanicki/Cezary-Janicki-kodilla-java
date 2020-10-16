@@ -1,8 +1,8 @@
 package com.kodilla.good.patterns.challenges.allegro;
 
 public class User {
-    String name;
-    String surname;
+    private final String name;
+    private final String surname;
 
     public String getName() {
         return name;
@@ -12,7 +12,7 @@ public class User {
         return surname;
     }
 
-    public User(String name, String surname) {
+    public User(final String name, final String surname) {
         this.name = name;
         this.surname = surname;
     }
