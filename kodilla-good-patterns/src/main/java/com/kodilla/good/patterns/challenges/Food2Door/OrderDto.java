@@ -3,15 +3,15 @@ package com.kodilla.good.patterns.challenges.Food2Door;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.HashMap;
 
 public class OrderDto {
     private final Producer producer;
-    private final Map<Products, BigDecimal> productsOrdered;
+    private final HashMap<Products, BigDecimal> productsOrdered;
     private final boolean isOrdered;
     private final LocalDateTime orderTime;
 
-    public OrderDto(Producer producer, Map<Products, BigDecimal> productsOrdered, boolean isOrdered, LocalDateTime orderTime) {
+    public OrderDto(Producer producer, HashMap<Products, BigDecimal> productsOrdered, boolean isOrdered, LocalDateTime orderTime) {
         this.producer = producer;
         this.productsOrdered = productsOrdered;
         this.isOrdered = isOrdered;
@@ -22,7 +22,7 @@ public class OrderDto {
         return producer;
     }
 
-    public Map<Products, BigDecimal> getProductsOrdered() {
+    public HashMap<Products, BigDecimal> getProductsOrdered() {
         return productsOrdered;
     }
 
