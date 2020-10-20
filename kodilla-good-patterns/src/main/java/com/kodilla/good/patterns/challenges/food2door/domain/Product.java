@@ -4,11 +4,13 @@ import java.math.BigDecimal;
 
 public class Product {
     private final String name;
-    private final BigDecimal price
+    private final BigDecimal price;
+    private final Producer producer;
 
-    public Product(String name, BigDecimal price) {
+    public Product(String name, BigDecimal price, Producer producer) {
         this.name = name;
         this.price = price;
+        this.producer = producer;
     }
 
     public String getName() {
@@ -18,6 +20,8 @@ public class Product {
     public BigDecimal getPrice() {
         return price;
     }
+
+    public Producer getProducer() { return producer; }
 
     @Override
     public String toString() {
