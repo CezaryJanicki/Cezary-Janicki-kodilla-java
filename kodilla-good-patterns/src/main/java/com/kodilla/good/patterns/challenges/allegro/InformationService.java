@@ -1,7 +1,6 @@
 package com.kodilla.good.patterns.challenges.allegro;
 
-public class InformationService {
+interface InformationService {
 
-    public void inform(User user) {
-    }
+    void inform(User user);
 }
