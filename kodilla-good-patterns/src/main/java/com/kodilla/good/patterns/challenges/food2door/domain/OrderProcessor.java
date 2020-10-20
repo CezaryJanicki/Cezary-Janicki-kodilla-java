@@ -1,4 +1,9 @@
-package com.kodilla.good.patterns.challenges.Food2Door;
+package com.kodilla.good.patterns.challenges.food2door.domain;
+
+import com.kodilla.good.patterns.challenges.food2door.api.OrderDto;
+import com.kodilla.good.patterns.challenges.food2door.api.OrderRequest;
+import com.kodilla.good.patterns.challenges.food2door.infrastructure.OrderRepository;
+import com.kodilla.good.patterns.challenges.food2door.infrastructure.InformationService;
 
 public class OrderProcessor {
 

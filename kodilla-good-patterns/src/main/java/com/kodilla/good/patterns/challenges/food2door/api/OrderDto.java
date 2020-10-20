@@ -1,17 +1,19 @@
-package com.kodilla.good.patterns.challenges.Food2Door;
+package com.kodilla.good.patterns.challenges.food2door.api;
 
 
-import java.math.BigDecimal;
+import com.kodilla.good.patterns.challenges.food2door.domain.Producer;
+import com.kodilla.good.patterns.challenges.food2door.domain.Product;
+
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.Map;
 
 public class OrderDto {
     private final Producer producer;
-    private final HashMap<Products, BigDecimal> productsOrdered;
+    private final Map<Product, Integer> productsOrdered;
     private final boolean isOrdered;
     private final LocalDateTime orderTime;
 
-    public OrderDto(Producer producer, HashMap<Products, BigDecimal> productsOrdered, boolean isOrdered, LocalDateTime orderTime) {
+    public OrderDto(Producer producer, Map<Product, Integer> productsOrdered, boolean isOrdered, LocalDateTime orderTime) {
         this.producer = producer;
         this.productsOrdered = productsOrdered;
         this.isOrdered = isOrdered;
@@ -22,7 +24,7 @@ public class OrderDto {
         return producer;
     }
 
-    public HashMap<Products, BigDecimal> getProductsOrdered() {
+    public Map<Product, Integer> getProductsOrdered() {
         return productsOrdered;
     }
 
