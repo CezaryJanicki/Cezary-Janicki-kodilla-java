@@ -7,9 +7,16 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LibraryTestSuite {
+
+    @Test
+    public void contextLoads() {
+
+    }
 
     @Test
     public void testLoadFromDb() {
@@ -29,6 +36,18 @@ public class LibraryTestSuite {
         Library library = context.getBean(Library.class);
         //When
         library.saveToDb();
+    }
+
+    @Test
+    public void testContext() {
+        //Given
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
+        //When & Then
+        System.out.println("XXXXXXXXXXXXXXXXXXXXX Beans list XXXXXXXXXXXXXXXXXX");
+        Arrays.stream(context
+                .getBeanDefinitionNames())
+                .forEach(System.out::println);
+        System.out.println("XXXXXXXXXXXXXXXXXXXXX Beans list XXXXXXXXXXXXXXXXXX");
     }
 
 }
