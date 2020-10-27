@@ -42,8 +42,8 @@ public class FlightSearchEngine {
                 .filter(arr -> arr.getArrival().equals(arrival))
                 .collect(Collectors.toSet());
 
-        if ((departureAirport.stream().anyMatch(e -> e.getArrival().equals(through)))
-            && (arrivalAirport.stream().anyMatch(e -> e.getDeparture().equals(through)))) {
+        if ((departureAirport.stream().anyMatch(e -> e.getArrival().equals(through))) //findAll 2 * 2 = 4;
+            && (arrivalAirport.stream().anyMatch(e -> e.getDeparture().equals(through)))) { //findAll 2*3 = 6
             System.out.println("There is a connecting flight from " + departure + " to " + arrival + " with a stop/change in " + through);
             List<Flight> connections = new ArrayList<>();
             connections.add(new Flight(departure, through));
