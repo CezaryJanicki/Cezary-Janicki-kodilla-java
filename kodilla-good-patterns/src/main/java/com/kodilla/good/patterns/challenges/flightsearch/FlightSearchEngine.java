@@ -1,6 +1,6 @@
 package com.kodilla.good.patterns.challenges.flightsearch;
 
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class FlightSearchEngine {
@@ -11,28 +11,27 @@ public class FlightSearchEngine {
         this.listOfFlights = listOfFlights;
     }
 
-    public Set<Flight> searchByFlightDeparture(String departure) {
+    public List<FlightSearchResult> searchByFlightDeparture(String departure) {
         System.out.println("Searching all Flights by departure from: " + departure);
-        listOfFlights.stream()
+
+        return listOfFlights.stream()
                 .filter(dep -> dep.getDeparture().equals(departure))
-                .forEach(System.out::println);
-        return listOfFlights.stream()
-                .filter(dep -> dep.getArrival().equals(departure))
-                .collect(Collectors.toSet());
+                .peek(System.out::println)
+                .map(FlightSearchResult::new)
+                .collect(Collectors.toList());
     }
 
-    public Set<Flight> searchByFlightArrival(String arrival) {
+    public List<FlightSearchResult> searchByFlightArrival(String arrival) {
         System.out.println("Searching all Flights by arrival to: " + arrival);
-        listOfFlights.stream()
-                .filter(arr -> arr.getArrival().equals(arrival))
-                .map(string -> string.toString())
-                .forEach(System.out::println);
+
         return listOfFlights.stream()
                 .filter(arr -> arr.getArrival().equals(arrival))
-                .collect(Collectors.toSet());
+                .peek(System.out::println)
+                .map(FlightSearchResult::new)
+                .collect(Collectors.toList());
     }
 
-    public void searchByFlightConnection(String departure, String arrival, String through) {
+    public List<FlightSearchResult> searchByFlightConnection(String departure, String arrival, String through) {
         System.out.println("Searching all Flights departing from: " + departure + " arriving to: " + arrival + " with change in: " + through);
 
         Set<Flight> departureAirport = listOfFlights.stream()
@@ -46,8 +45,13 @@ public class FlightSearchEngine {
         if ((departureAirport.stream().anyMatch(e -> e.getArrival().equals(through)))
             && (arrivalAirport.stream().anyMatch(e -> e.getDeparture().equals(through)))) {
             System.out.println("There is a connecting flight from " + departure + " to " + arrival + " with a stop/change in " + through);
+            List<Flight> connections = new ArrayList<>();
+            connections.add(new Flight(departure, through));
+            connections.add(new Flight(through, arrival));
+            return Collections.singletonList(new FlightSearchResult(connections));
             } else {
             System.out.println("There is no connection from " + departure + " to " + arrival + " with a stop/change in " + through);
+            return Collections.emptyList();
         }
     }
 }
