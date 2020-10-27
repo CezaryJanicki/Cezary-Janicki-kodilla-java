@@ -31,10 +31,42 @@ public class BoardTestSuite {
         board.getLists().add(listToDo);
         board.getLists().add(listInProgress);
         board.getLists().add(listDone);
-        System.out.println(board);
+
+        //making a shallow clone of object board
+        Board clonedBoard = null;
+        try {
+            clonedBoard = board.shallowCopy();
+            clonedBoard.setName("Project number 2");
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            System.out.println(e);
+        }
+
+        //making a deep copy of object board
+        Board deepClonedBoard = null;
+        try {
+            deepClonedBoard = board.deepCopy();
+            deepClonedBoard.setName("Project number 3");
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            System.out.println(e);
+        }
 
         //When
+        board.getLists().remove(listToDo);
+
         //Then
-        Assert.assertEquals(3, board.getLists().size());
+        System.out.println("------------------------> xxxxxxx <---------------------");
+        System.out.println(board);
+        System.out.println("------------------------> xxxxxxx <---------------------");
+        System.out.println(clonedBoard);
+        System.out.println("------------------------> xxxxxxx <---------------------");
+        System.out.println(deepClonedBoard);
+        System.out.println("------------------------> xxxxxxx <---------------------");
+        Assert.assertEquals(2, board.getLists().size());
+        Assert.assertEquals(2, clonedBoard.getLists().size());
+        Assert.assertEquals(3, deepClonedBoard.getLists().size());
+        Assert.assertEquals(clonedBoard.getLists(), board.getLists());
+        Assert.assertNotEquals(deepClonedBoard.getLists(), board.getLists());
     }
 }
