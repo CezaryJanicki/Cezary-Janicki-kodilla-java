@@ -1,4 +1,4 @@
-plugins {
+GIT plugins {
     id 'java'
 }
 
