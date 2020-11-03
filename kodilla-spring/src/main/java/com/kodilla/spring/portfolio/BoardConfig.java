@@ -14,7 +14,6 @@ public class BoardConfig {
     public TaskList toDoList() {
         return new TaskList();
     }
-
     @Bean
     public TaskList inProgressList() {
         return new TaskList();
@@ -23,7 +22,4 @@ public class BoardConfig {
     public TaskList doneList() {
         return new TaskList();
     }
-    /*
-    Napisz klasę konfigurującą Beany o nazwie BoardConfig, która utworzy trzy różne Beany reprezentujące listy zadań i wstrzyknie je do Beana klasy Board.
-     */
 }
