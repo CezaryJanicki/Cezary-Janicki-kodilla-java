@@ -28,3 +28,4 @@ public class CheckersTestSuite {
         Assert.assertEquals(Queen.class, figureThree.getClass());
         Assert.assertNull(figureFour);
     }
+}
