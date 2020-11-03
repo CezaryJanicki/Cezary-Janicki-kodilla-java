@@ -12,11 +12,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class CalculatorTestSuite {
 
+    //Given
+    ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
+    Calculator calculator = context.getBean(Calculator.class);
+
     @Test
     public void testCalculationsAdd() {
         //Given
-        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
-        Calculator calculator = context.getBean(Calculator.class);
         //When
         double result = calculator.add(1,2);
         //Then
@@ -26,8 +28,6 @@ public class CalculatorTestSuite {
     @Test
     public void testCalculationsSub() {
         //Given
-        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
-        Calculator calculator = context.getBean(Calculator.class);
         //When
         double result = calculator.sub(3,2);
         //Then
@@ -37,8 +37,6 @@ public class CalculatorTestSuite {
     @Test
     public void testCalculationsMul() {
         //Given
-        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
-        Calculator calculator = context.getBean(Calculator.class);
         //When
         double result = calculator.mul(1,2);
         //Then
@@ -48,8 +46,6 @@ public class CalculatorTestSuite {
     @Test
     public void testCalcuationsDiv() {
         //Given
-        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
-        Calculator calculator = context.getBean(Calculator.class);
         //When
         double result = calculator.div(4,2);
         //Then
