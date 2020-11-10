@@ -19,7 +19,7 @@ public final class Task {
     public Task() {
     }
 
-    public Task(final String description, final int duration) {
+    public Task(String description, int duration) {
         this.description = description;
         this.duration = duration;
         this.created = new Date();
