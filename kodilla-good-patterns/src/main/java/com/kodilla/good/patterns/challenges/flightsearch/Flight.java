@@ -3,10 +3,12 @@ package com.kodilla.good.patterns.challenges.flightsearch;
 public class Flight {
     private final String departure;
     private final String arrival;
+    private final int flightNumber;
 
-    public Flight(String departure, String arrival) {
+    public Flight(String departure, String arrival, int flightNumber) {
         this.departure = departure;
         this.arrival = arrival;
+        this.flightNumber = flightNumber;
     }
 
     public String getDeparture() {
@@ -17,6 +19,10 @@ public class Flight {
         return arrival;
     }
 
+    public int getFlightNumber() {
+        return flightNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -24,14 +30,16 @@ public class Flight {
 
         Flight flight = (Flight) o;
 
-        if (departure != null ? !departure.equals(flight.departure) : flight.departure != null) return false;
-        return arrival != null ? arrival.equals(flight.arrival) : flight.arrival == null;
+        if (flightNumber != flight.flightNumber) return false;
+        if (!departure.equals(flight.departure)) return false;
+        return arrival.equals(flight.arrival);
     }
 
     @Override
     public int hashCode() {
-        int result = departure != null ? departure.hashCode() : 0;
-        result = 31 * result + (arrival != null ? arrival.hashCode() : 0);
+        int result = departure.hashCode();
+        result = 31 * result + arrival.hashCode();
+        result = 31 * result + flightNumber;
         return result;
     }
 
@@ -39,6 +47,7 @@ public class Flight {
     public String toString() {
         return "Flight has the following conditions:" +
                 "departure Airport is: " + departure +
-                " arrival Airport is: " + arrival + "\n";
+                " arrival Airport is: " + arrival +
+                " flight number is: " + flightNumber + "\n";
     }
 }

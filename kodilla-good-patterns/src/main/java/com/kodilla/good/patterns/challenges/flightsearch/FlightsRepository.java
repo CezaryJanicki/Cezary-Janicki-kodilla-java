@@ -7,24 +7,26 @@ import java.util.Set;
 public class FlightsRepository {
     public Set<Flight> getAllFlights() {
         Set<Flight> allFlights = new HashSet<>();
-        allFlights.add(new Flight("Wroclaw", "Warszawa"));
-        allFlights.add(new Flight("Wroclaw","Katowice"));
-        allFlights.add(new Flight("Wroclaw","Poznan"));
-        allFlights.add(new Flight("Wroclaw","Krakow"));
-        allFlights.add(new Flight("Wroclaw","Gdansk"));
-        allFlights.add(new Flight("Wroclaw","Torun"));
-        allFlights.add(new Flight("Warszawa","Wroclaw"));
-        allFlights.add(new Flight("Warszawa","Katowice"));
-        allFlights.add(new Flight("Warszawa","Poznan"));
-        allFlights.add(new Flight("Warszawa","Krakow"));
-        allFlights.add(new Flight("Warszawa","Gdansk"));
-        allFlights.add(new Flight("Warszawa","Torun"));
-        allFlights.add(new Flight("Torun","Warszawa"));
-        allFlights.add(new Flight("Torun","Katowice"));
-        allFlights.add(new Flight("Torun","Poznan"));
-        allFlights.add(new Flight("Torun","Krakow"));
-        allFlights.add(new Flight("Torun","Gdansk"));
-        allFlights.add(new Flight("Torun","Wroclaw"));
+        allFlights.add(new Flight("Wroclaw", "Warszawa", 11));
+        allFlights.add(new Flight("Wroclaw","Katowice", 12));
+        allFlights.add(new Flight("Wroclaw","Poznan", 12));
+        allFlights.add(new Flight("Wroclaw","Krakow", 11));
+        allFlights.add(new Flight("Wroclaw","Gdansk", 13));
+        allFlights.add(new Flight("Wroclaw","Torun", 12));
+        allFlights.add(new Flight("Warszawa","Wroclaw", 13));
+        allFlights.add(new Flight("Warszawa","Katowice", 14));
+        allFlights.add(new Flight("Warszawa","Poznan", 21));
+        allFlights.add(new Flight("Warszawa","Krakow", 22));
+        allFlights.add(new Flight("Warszawa","Gdansk", 21));
+        allFlights.add(new Flight("Warszawa","Torun", 12));
+        allFlights.add(new Flight("Torun","Warszawa", 12));
+        allFlights.add(new Flight("Torun","Katowice", 23));
+        allFlights.add(new Flight("Torun","Poznan", 23));
+        allFlights.add(new Flight("Torun","Krakow", 12));
+        allFlights.add(new Flight("Torun","Gdansk", 12));
+        allFlights.add(new Flight("Torun","Wroclaw", 12));
+        allFlights.add(new Flight("Wroclaw", "Torun", 432));
+        allFlights.add(new Flight("Torun", "Katowice", 4532));
         return Collections.unmodifiableSet(allFlights);
     }
 }

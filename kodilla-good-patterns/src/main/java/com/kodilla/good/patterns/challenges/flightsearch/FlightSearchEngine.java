@@ -31,7 +31,7 @@ public class FlightSearchEngine {
                 .collect(Collectors.toList());
     }
 
-    public List<FlightSearchResult> searchByFlightConnection(String departure, String arrival, String through) {
+    public List<Flight> searchByFlightConnection(String departure, String arrival, String through) {
         System.out.println("Searching all Flights departing from: " + departure + " arriving to: " + arrival + " with change in: " + through);
 
         Set<Flight> departureAirport = listOfFlights.stream()
@@ -42,14 +42,20 @@ public class FlightSearchEngine {
                 .filter(arr -> arr.getArrival().equals(arrival))
                 .collect(Collectors.toSet());
 
+        List<Flight> listOfFlightsWithInterChange = listOfFlights.stream()
+                .filter(f -> f.getDeparture().equals(departure) && f.getArrival().equals(through))
+                .collect(Collectors.toList());
+        listOfFlights.stream()
+                .filter(f -> f.getDeparture().equals(through) && f.getArrival().equals(arrival))
+                .collect(Collectors.toCollection(() -> listOfFlightsWithInterChange));
+
         if ((departureAirport.stream().anyMatch(e -> e.getArrival().equals(through)))
-            && (arrivalAirport.stream().anyMatch(e -> e.getDeparture().equals(through)))) {
+                && (arrivalAirport.stream().anyMatch(e -> e.getDeparture().equals(through)))) {
             System.out.println("There is a connecting flight from " + departure + " to " + arrival + " with a stop/change in " + through);
-            List<Flight> connections = new ArrayList<>();
-            connections.add(new Flight(departure, through));
-            connections.add(new Flight(through, arrival));
-            return Collections.singletonList(new FlightSearchResult(connections));
-            } else {
+            listOfFlightsWithInterChange.stream()
+                    .forEach(System.out::println);
+            return listOfFlightsWithInterChange;
+        } else {
             System.out.println("There is no connection from " + departure + " to " + arrival + " with a stop/change in " + through);
             return Collections.emptyList();
         }
