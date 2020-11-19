@@ -10,73 +10,41 @@ import java.util.stream.IntStream;
 public class LibraryTestSuite {
 
     @Test
-    public void testGetBooks() {
+    public void testGetBooksShallowCopy() throws CloneNotSupportedException {
         //Given
         Library library = new Library("Library of Alexandria");
-        IntStream.iterate(0, n -> n + 1 )
-                .limit(9)
-                .forEach(n -> library.getBooks().add(new Book("Ulysses" + n, "James Joyce" + n, LocalDate.of(2020 - n, 10 - n, 30 - n))));
+        Book book = new Book("My life with Donald Trump", "Mike Pence", LocalDate.of(2020,10,3));
+
+        Library clonedLibrary = library.shallowCopy();
+        clonedLibrary.setName("Library of Egypt");
+
         //When
-        Library libraryTest = new Library("Library of Alexandria");
+        clonedLibrary.getBooks().add(book);
+
         //Then
-        Assert.assertEquals(libraryTest.getName(), library.getName());
-        Assert.assertEquals(9, library.getBooks().size());
+        Assert.assertEquals("Library of Alexandria", library.getName());
+        Assert.assertEquals("Library of Egypt", clonedLibrary.getName());
+        Assert.assertEquals(1, library.getBooks().size());
+        Assert.assertEquals(1, clonedLibrary.getBooks().size());
+        Assert.assertTrue(library.getBooks().contains(book));
     }
 
     @Test
-    public void testGetBooksShallowCopy() {
+    public void testGetBooksDeepCopy() throws CloneNotSupportedException {
         //Given
         Library library = new Library("Library of Alexandria");
-        IntStream.iterate(0, n -> n + 1 )
-                .limit(9)
-                .forEach(n -> library.getBooks().add(new Book("Ulysses" + n, "James Joyce" + n, LocalDate.of(2020 - n, 10 - n, 30 - n))));
+        Book book = new Book("My life with Donald Trump", "Mike Pence", LocalDate.of(2020,10,3));
 
-        Book lastBook = new Book("My life with Donald Trump", "Mike Pence", LocalDate.of(2020,10,3));
-        library.getBooks().add(lastBook);
-        System.out.println("Library book count before removal : " + library.getBooks().size());
+        Library clonedLibrary = library.deepCopy();
+        clonedLibrary.setName("Library of Egypt");
 
-        Library clonedLibrary = null;
-        try {
-            clonedLibrary = library.shallowCopy();
-            clonedLibrary.setName("Library of Egypt");
-        } catch (CloneNotSupportedException e ) {
-            e.printStackTrace();
-            System.out.println(e);
-        }
         //When
-        library.getBooks().remove(lastBook);
-        //Then
-        System.out.println("Library book count after Removal " + library.getBooks().size());
-        System.out.println("Cloned Library book after Library book Removal " + clonedLibrary.getBooks().size());
-        Assert.assertEquals(9, clonedLibrary.getBooks().size());
-    }
-
-    @Test
-    public void testGetBooksDeepCopy() {
-        //Given
-        Library library = new Library("Library of Alexandria");
-        IntStream.iterate(0, n -> n + 1 )
-                .limit(9)
-                .forEach(n -> library.getBooks().add(new Book("Ulysses" + n, "James Joyce" + n, LocalDate.of(2020 - n, 10 - n, 30 - n))));
-
-        Book lastBook = new Book("My life with Donald Trump", "Mike Pence", LocalDate.of(2020,10,3));
-        library.getBooks().add(lastBook);
-        System.out.println("Library book count before removal : " + library.getBooks().size());
-
-        Library deepClonedLibrary = null;
-        try {
-            deepClonedLibrary = library.deepCopy();
-            deepClonedLibrary.setName("Library of Egypt");
-        } catch (CloneNotSupportedException e ) {
-            e.printStackTrace();
-            System.out.println(e);
-        }
-        //When
-        library.getBooks().remove(lastBook);
+        clonedLibrary.getBooks().add(book);
 
         //Then
-        System.out.println("Library book count after Removal " + library.getBooks().size());
-        System.out.println("DeepCloned Library book after Library book Removal " + deepClonedLibrary.getBooks().size());
-        Assert.assertEquals(10, deepClonedLibrary.getBooks().size());
+        Assert.assertEquals("Library of Alexandria", library.getName());
+        Assert.assertEquals("Library of Egypt", clonedLibrary.getName());
+        Assert.assertEquals(0, library.getBooks().size());
+        Assert.assertEquals(1, clonedLibrary.getBooks().size());
     }
 }
