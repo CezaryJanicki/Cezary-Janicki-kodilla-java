@@ -6,9 +6,17 @@ public class Application {
         FlightsRepository flightsRepository = new FlightsRepository();
 
         FlightSearchEngine flightSearchEngine = new FlightSearchEngine(flightsRepository.getAllFlights());
-        flightSearchEngine.searchByFlightArrival("Warszawa");
-        flightSearchEngine.searchByFlightDeparture("Warszawa");
-        flightSearchEngine.searchByFlightConnection("Wroclaw", "Torun", "Katowice");
-        flightSearchEngine.searchByFlightConnection("Wroclaw", "Katowice", "Torun");
+
+        System.out.println("Searching all Flights by arrival to: Warszawa");
+        flightSearchEngine.searchByFlightArrival("Warszawa").stream().forEach(System.out::println);
+
+        System.out.println("Searching all Flights by departure from: Warszawa");
+        flightSearchEngine.searchByFlightDeparture("Warszawa").stream().forEach(System.out::println);
+
+        System.out.println("Searching all Flights departing from: Wroclaw arriving to: Torun with change in: Katowice");
+        flightSearchEngine.searchByFlightConnection("Wroclaw", "Torun", "Katowice").stream().forEach(System.out::println);
+
+        System.out.println("Searching all Flights departing from: Wroclaw arriving to: Katowice with change in: Torun");
+        flightSearchEngine.searchByFlightConnection("Wroclaw", "Katowice", "Torun").stream().forEach(System.out::println);
     }
 }

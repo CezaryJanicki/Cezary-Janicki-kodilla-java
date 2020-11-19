@@ -12,27 +12,20 @@ public class FlightSearchEngine {
     }
 
     public List<FlightSearchResult> searchByFlightDeparture(String departure) {
-        System.out.println("Searching all Flights by departure from: " + departure);
-
         return listOfFlights.stream()
                 .filter(dep -> dep.getDeparture().equals(departure))
-                .peek(System.out::println)
                 .map(FlightSearchResult::new)
                 .collect(Collectors.toList());
     }
 
     public List<FlightSearchResult> searchByFlightArrival(String arrival) {
-        System.out.println("Searching all Flights by arrival to: " + arrival);
-
         return listOfFlights.stream()
                 .filter(arr -> arr.getArrival().equals(arrival))
-                .peek(System.out::println)
                 .map(FlightSearchResult::new)
                 .collect(Collectors.toList());
     }
 
     public List<Flight> searchByFlightConnection(String departure, String arrival, String through) {
-        System.out.println("Searching all Flights departing from: " + departure + " arriving to: " + arrival + " with change in: " + through);
 
         Set<Flight> departureAirport = listOfFlights.stream()
                 .filter(dep -> dep.getDeparture().equals(departure))
@@ -51,12 +44,8 @@ public class FlightSearchEngine {
 
         if ((departureAirport.stream().anyMatch(e -> e.getArrival().equals(through)))
                 && (arrivalAirport.stream().anyMatch(e -> e.getDeparture().equals(through)))) {
-            System.out.println("There is a connecting flight from " + departure + " to " + arrival + " with a stop/change in " + through);
-            listOfFlightsWithInterChange.stream()
-                    .forEach(System.out::println);
             return listOfFlightsWithInterChange;
         } else {
-            System.out.println("There is no connection from " + departure + " to " + arrival + " with a stop/change in " + through);
             return Collections.emptyList();
         }
     }
