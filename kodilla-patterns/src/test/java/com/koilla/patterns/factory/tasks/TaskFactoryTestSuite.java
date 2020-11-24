@@ -1,7 +1,6 @@
 package com.koilla.patterns.factory.tasks;
 
-import com.kodilla.patterns.factory.task.Task;
-import com.kodilla.patterns.factory.task.TaskFactory;
+import com.kodilla.patterns.factory.task.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,14 +11,16 @@ public class TaskFactoryTestSuite {
         //Given
         TaskFactory taskFactory = new TaskFactory();
         //When
-        Task drivingTask = taskFactory.createTask(TaskFactory.DrivingTask);
-        String drivingTaskExecution = drivingTask.executeTask();
+        Task drivingTask = taskFactory.createTask(TaskFactory.TaskType.DRIVING);
+        boolean before = drivingTask.isTaskExecuted();
+        drivingTask.executeTask();
         String drivingTaskName = drivingTask.getTaskName();
-        Boolean drivingTaskExecutionConfirmation = drivingTask.isTaskExecuted();
+        boolean after = drivingTask.isTaskExecuted();
         //Then
-        Assert.assertEquals("I Drive Home to Poznan by Car", drivingTaskExecution);
+        Assert.assertFalse(before);
         Assert.assertEquals("Drive Home", drivingTaskName);
-        Assert.assertTrue(drivingTaskExecutionConfirmation);
+        Assert.assertTrue(after);
+        Assert.assertTrue(drivingTask instanceof DrivingTask);
     }
 
     @Test
@@ -27,14 +28,16 @@ public class TaskFactoryTestSuite {
         //Given
         TaskFactory taskFactory = new TaskFactory();
         //When
-        Task paintingTask = taskFactory.createTask((TaskFactory.PaintingTask));
-        String paintingTaskExecution = paintingTask.executeTask();
+        Task paintingTask = taskFactory.createTask((TaskFactory.TaskType.PAINTING));
+        boolean before = paintingTask.isTaskExecuted();
+        paintingTask.executeTask();
         String painingTaskName = paintingTask.getTaskName();
-        Boolean painingTaskExecutionConfirmation = paintingTask.isTaskExecuted();
-        //THen
-        Assert.assertEquals("I am painting at Home Blue Roses", paintingTaskExecution);
+        boolean after = paintingTask.isTaskExecuted();
+        //Then
+        Assert.assertFalse(before);
         Assert.assertEquals("painting at Home", painingTaskName);
-        Assert.assertTrue(painingTaskExecutionConfirmation);
+        Assert.assertTrue(after);
+        Assert.assertTrue(paintingTask instanceof PaintingTask);
     }
 
     @Test
@@ -42,13 +45,15 @@ public class TaskFactoryTestSuite {
         //Given
         TaskFactory taskFactory = new TaskFactory();
         //When
-        Task shoppingTask = taskFactory.createTask((TaskFactory.ShoppingTask));
-        String paintingTaskExecution = shoppingTask.executeTask();
+        Task shoppingTask = taskFactory.createTask((TaskFactory.TaskType.SHOPPING));
+        boolean before = shoppingTask.isTaskExecuted();
+        shoppingTask.executeTask();
         String painingTaskName = shoppingTask.getTaskName();
-        Boolean painingTaskExecutionConfirmation = shoppingTask.isTaskExecuted();
-        //THen
-        Assert.assertEquals("I am shopping in H&M for 13.0 Trousers", paintingTaskExecution);
+        boolean after = shoppingTask.isTaskExecuted();
+        //Then
+        Assert.assertFalse(before);
         Assert.assertEquals("shopping in H&M", painingTaskName);
-        Assert.assertTrue(painingTaskExecutionConfirmation);
+        Assert.assertTrue(after);
+        Assert.assertTrue(shoppingTask instanceof ShoppingTask);
     }
 }

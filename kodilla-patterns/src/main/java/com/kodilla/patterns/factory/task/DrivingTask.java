@@ -13,12 +13,8 @@ public class DrivingTask implements Task {
     }
 
     @Override
-    public String executeTask() {
-        if (!isExecuted) {
+    public void executeTask() {
             this.isExecuted = true;
-            return "I " + taskName + " to " + where + " by " + using;
-        }
-        return "Task not Executed";
     }
 
     @Override
@@ -28,9 +24,6 @@ public class DrivingTask implements Task {
 
     @Override
     public boolean isTaskExecuted() {
-        if (isExecuted) {
-            return true;
-        }
-        return false;
+        return isExecuted;
     }
 }
