@@ -18,20 +18,18 @@ public class TaskListDaoTestSuite {
 
     @Autowired
     TaskListDao taskListDao;
-    private final static String Description = "Tasks in Progress";
-    private final static String ListName = "In progress";
+    private final static String DESCRIPTION = "Tasks in Progress";
+    private final static String LIST_NAME = "In progress";
 
     @Test
     public void testFindByListName() {
         //Given
-        TaskList taskList = new TaskList(ListName, Description);
+        TaskList taskList = new TaskList(LIST_NAME, DESCRIPTION);
         taskListDao.save(taskList);
-        String listName = taskList.getListName();
-        System.out.println(listName);
         //When
-        List<TaskList> readListName = taskListDao.findByListName(listName);
+        List<TaskList> readListName = taskListDao.findByListName(LIST_NAME);
         //Then
-        //Assert.assertEquals(listName, readListName);
+        Assert.assertEquals(LIST_NAME, readListName);
         Assert.assertEquals(1, readListName.size());
         //CleanUp
         taskListDao.delete(taskList);
