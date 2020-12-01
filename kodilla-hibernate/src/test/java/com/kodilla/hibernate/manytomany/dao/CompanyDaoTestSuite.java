@@ -68,7 +68,7 @@ public class CompanyDaoTestSuite {
     }
 
     @Test
-    public void testNamedQueries() {
+    public void testNamedQueriesCompany() {
         //Given
         Employee johnSmith = new Employee("John", "Smith");
         Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
@@ -77,10 +77,45 @@ public class CompanyDaoTestSuite {
         Company softwareMachine = new Company("Software Machine");
         Company dataMaesters = new Company("Data Maesters");
         Company greyMatter = new Company("Gray Matter");
+        Company softSkin = new Company("SoftSkin");
+
+        companyDao.save(softwareMachine);
+        int softwareMachineId = softwareMachine.getId();
+        companyDao.save(dataMaesters);
+        int dataMaestersId = dataMaesters.getId();
+        companyDao.save(greyMatter);
+        int greyMatterId = greyMatter.getId();
+        companyDao.save(softSkin);
+        int softSkinId = softSkin.getId();
+
+        //When
+        List<Company> companySof = companyDao.findCompanyByFirst3Letters("Sof");
+
+        //Then
+        try {
+            Assert.assertEquals(2, companySof.size());
+        } finally {
+            companyDao.deleteAll();
+        }
+    }
+
+    @Test
+    public void testNamedQueriesEmployee() {
+        //Given
+        Employee johnSmith = new Employee("John", "Smith");
+        Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
+        Employee lindaKovalsky = new Employee("Linda", "Kovalsky");
+        Employee lindaBruebeck = new Employee("Linda", "Bruebeck");
+
+        Company softwareMachine = new Company("Software Machine");
+        Company dataMaesters = new Company("Data Maesters");
+        Company greyMatter = new Company("Gray Matter");
 
         softwareMachine.getEmployees().add(johnSmith);
+        softwareMachine.getEmployees().add(lindaBruebeck);
         dataMaesters.getEmployees().add(stephanieClarckson);
         dataMaesters.getEmployees().add(lindaKovalsky);
+        dataMaesters.getEmployees().add(lindaBruebeck);
         greyMatter.getEmployees().add(johnSmith);
         greyMatter.getEmployees().add(lindaKovalsky);
 
@@ -89,6 +124,8 @@ public class CompanyDaoTestSuite {
         stephanieClarckson.getCompanies().add(dataMaesters);
         lindaKovalsky.getCompanies().add(dataMaesters);
         lindaKovalsky.getCompanies().add(greyMatter);
+        lindaBruebeck.getCompanies().add(dataMaesters);
+        lindaBruebeck.getCompanies().add(softwareMachine);
 
         companyDao.save(softwareMachine);
         int softwareMachineId = softwareMachine.getId();
@@ -98,13 +135,11 @@ public class CompanyDaoTestSuite {
         int greyMatterId = greyMatter.getId();
 
         //When
-        List<Company> companySof = companyDao.findCompanyByFirst3Letters("Sof");
-        List<Employee> employeeLinda = employeeDao.findByFirstName("Linda");
+        List<Employee> employeeLinda = employeeDao.findByLastName("Linda");
 
         //Then
         try {
-            Assert.assertEquals(1, companySof.size());
-            Assert.assertEquals(1, employeeLinda.size());
+            Assert.assertEquals(2, employeeLinda.size());
 
         } finally {
             companyDao.deleteAll();

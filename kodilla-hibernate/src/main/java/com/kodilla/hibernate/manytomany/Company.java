@@ -8,7 +8,7 @@ import java.util.List;
 @NamedNativeQuery(
         name = "Company.findCompanyByFirst3Letters",
         query = "SELECT * FROM COMPANIES" +
-                " WHERE SUBSTRING(COMPANY_NAME, 1, 3) = :SUBSTR",
+                " WHERE LEFT(COMPANY_NAME, 3) = :SUBSTR",
         resultClass = Company.class
 )
 
