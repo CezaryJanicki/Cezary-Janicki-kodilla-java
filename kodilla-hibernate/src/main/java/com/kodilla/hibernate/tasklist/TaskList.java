@@ -13,7 +13,7 @@ public final class TaskList {
     private int id;
     private String listName;
     private String description;
-    private List<TaskList> taskList;
+    private List<TaskList> taskList = new ArrayList<>();
 
     public TaskList() {
     }
@@ -21,7 +21,6 @@ public final class TaskList {
     public TaskList(String listName, String description) {
         this.listName = listName;
         this.description = description;
-        this.taskList = new ArrayList<>();
     }
 
     @Id
