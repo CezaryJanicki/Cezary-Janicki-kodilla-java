@@ -68,25 +68,17 @@ public class CompanyDaoTestSuite {
     }
 
     @Test
-    public void testNamedQueriesCompany() {
+    public void testQueryCompanyBy3FirstLetters() {
         //Given
-        Employee johnSmith = new Employee("John", "Smith");
-        Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
-        Employee lindaKovalsky = new Employee("Linda", "Kovalsky");
-
         Company softwareMachine = new Company("Software Machine");
         Company dataMaesters = new Company("Data Maesters");
         Company greyMatter = new Company("Gray Matter");
         Company softSkin = new Company("SoftSkin");
 
         companyDao.save(softwareMachine);
-        int softwareMachineId = softwareMachine.getId();
         companyDao.save(dataMaesters);
-        int dataMaestersId = dataMaesters.getId();
         companyDao.save(greyMatter);
-        int greyMatterId = greyMatter.getId();
         companyDao.save(softSkin);
-        int softSkinId = softSkin.getId();
 
         //When
         List<Company> companySof = companyDao.findCompanyByFirst3Letters("Sof");
@@ -100,12 +92,12 @@ public class CompanyDaoTestSuite {
     }
 
     @Test
-    public void testNamedQueriesEmployee() {
+    public void testQueryEmployeeByLastname() {
         //Given
         Employee johnSmith = new Employee("John", "Smith");
         Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
         Employee lindaKovalsky = new Employee("Linda", "Kovalsky");
-        Employee lindaBruebeck = new Employee("Linda", "Bruebeck");
+        Employee lindaBruebeck = new Employee("Martha", "Kovalsky");
 
         Company softwareMachine = new Company("Software Machine");
         Company dataMaesters = new Company("Data Maesters");
@@ -128,18 +120,15 @@ public class CompanyDaoTestSuite {
         lindaBruebeck.getCompanies().add(softwareMachine);
 
         companyDao.save(softwareMachine);
-        int softwareMachineId = softwareMachine.getId();
         companyDao.save(dataMaesters);
-        int dataMaestersId = dataMaesters.getId();
         companyDao.save(greyMatter);
-        int greyMatterId = greyMatter.getId();
 
         //When
-        List<Employee> employeeLinda = employeeDao.findByLastName("Linda");
+        List<Employee> kovalsky = employeeDao.findByLastName("Kovalsky");
 
         //Then
         try {
-            Assert.assertEquals(2, employeeLinda.size());
+            Assert.assertEquals(2, kovalsky.size());
 
         } finally {
             companyDao.deleteAll();
