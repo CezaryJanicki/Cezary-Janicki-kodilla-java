@@ -34,7 +34,7 @@ public class PortfolioTestSuite {
         Assert.assertTrue(board.getGetToDoList().getTaskList().contains("Task1"));
         Assert.assertEquals(1, board.getInProgressList().getTaskList().size());
         Assert.assertTrue(board.getInProgressList().getTaskList().contains("Task2"));
-        Assert.assertEquals(2, board.getDoneList().getTaskList().size());
+        Assert.assertEquals(1, board.getDoneList().getTaskList().size());
         Assert.assertTrue(board.getDoneList().getTaskList().contains("Task3"));
     }
 }
