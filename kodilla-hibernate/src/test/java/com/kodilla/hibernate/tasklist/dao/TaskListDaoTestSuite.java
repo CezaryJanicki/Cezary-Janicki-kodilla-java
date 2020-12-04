@@ -27,7 +27,6 @@ public class TaskListDaoTestSuite {
     @Autowired
     private TaskDao taskDao;
 
-
     @Test
     public void testFindByListName() {
         //Given

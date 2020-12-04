@@ -31,7 +31,7 @@ public final class TaskList {
         return id;
     }
 
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 
@@ -40,7 +40,7 @@ public final class TaskList {
         return listName;
     }
 
-    public void setListName(String listName) {
+    private void setListName(String listName) {
         this.listName = listName;
     }
 
@@ -49,7 +49,7 @@ public final class TaskList {
         return description;
     }
 
-    public void setDescription(String description) {
+    private void setDescription(String description) {
         this.description = description;
     }
 
