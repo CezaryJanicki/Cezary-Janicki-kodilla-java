@@ -1,0 +1,11 @@
+INSERT INTO POSTS (USER_ID, BODY)
+VALUES (4, "This is an additional post");
+
+UPDATE POSTS
+SET BODY = "To delete"
+WHERE ID = 7;
+COMMIT;
+
+DELETE FROM POSTS
+WHERE ID = 8;
+COMMIT;

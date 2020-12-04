@@ -13,7 +13,7 @@ public final class TaskList {
     private int id;
     private String listName;
     private String description;
-    private List<TaskList> taskList = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     public TaskList() {
     }
@@ -56,5 +56,19 @@ public final class TaskList {
     @Override
     public String toString() {
         return listName;
+    }
+
+    @OneToMany (
+            targetEntity = Task.class,
+            mappedBy = "taskList",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    private void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }
