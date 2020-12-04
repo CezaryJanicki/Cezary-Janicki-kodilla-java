@@ -5,6 +5,13 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedNativeQuery(
+        name = "Company.findCompanyByFirst3Letters",
+        query = "SELECT * FROM COMPANIES" +
+                " WHERE LEFT(COMPANY_NAME, 3) = :SUBSTR",
+        resultClass = Company.class
+)
+
 @Entity
 @Table(name = "COMPANIES")
 public final class Company {

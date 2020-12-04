@@ -6,14 +6,20 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CompanyDaoTestSuite {
     @Autowired
     CompanyDao companyDao;
+
+    @Autowired
+    EmployeeDao employeeDao;
 
     @Test
     public void testSaveManyToMany() {
@@ -52,12 +58,80 @@ public class CompanyDaoTestSuite {
         Assert.assertNotEquals(0, greyMatterId);
 
         //CleanUp
-        //try {
-        //  companyDao.deleteById(softwareMachineId);
-        //  companyDao.deleteById(dataMaestersId);
-        //  companyDao.deleteById(greyMatterId);
-        // } catch (Exception e {
-        //      //do nothing
-        //}
+        try {
+          companyDao.deleteById(softwareMachineId);
+          companyDao.deleteById(dataMaestersId);
+          companyDao.deleteById(greyMatterId);
+         } catch (Exception e ) {
+              //do nothing
+        }
+    }
+
+    @Test
+    public void testQueryCompanyBy3FirstLetters() {
+        //Given
+        Company softwareMachine = new Company("Software Machine");
+        Company dataMaesters = new Company("Data Maesters");
+        Company greyMatter = new Company("Gray Matter");
+        Company softSkin = new Company("SoftSkin");
+
+        companyDao.save(softwareMachine);
+        companyDao.save(dataMaesters);
+        companyDao.save(greyMatter);
+        companyDao.save(softSkin);
+
+        //When
+        List<Company> companySof = companyDao.findCompanyByFirst3Letters("Sof");
+
+        //Then
+        try {
+            Assert.assertEquals(2, companySof.size());
+        } finally {
+            companyDao.deleteAll();
+        }
+    }
+
+    @Test
+    public void testQueryEmployeeByLastname() {
+        //Given
+        Employee johnSmith = new Employee("John", "Smith");
+        Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
+        Employee lindaKovalsky = new Employee("Linda", "Kovalsky");
+        Employee lindaBruebeck = new Employee("Martha", "Kovalsky");
+
+        Company softwareMachine = new Company("Software Machine");
+        Company dataMaesters = new Company("Data Maesters");
+        Company greyMatter = new Company("Gray Matter");
+
+        softwareMachine.getEmployees().add(johnSmith);
+        softwareMachine.getEmployees().add(lindaBruebeck);
+        dataMaesters.getEmployees().add(stephanieClarckson);
+        dataMaesters.getEmployees().add(lindaKovalsky);
+        dataMaesters.getEmployees().add(lindaBruebeck);
+        greyMatter.getEmployees().add(johnSmith);
+        greyMatter.getEmployees().add(lindaKovalsky);
+
+        johnSmith.getCompanies().add(softwareMachine);
+        johnSmith.getCompanies().add(greyMatter);
+        stephanieClarckson.getCompanies().add(dataMaesters);
+        lindaKovalsky.getCompanies().add(dataMaesters);
+        lindaKovalsky.getCompanies().add(greyMatter);
+        lindaBruebeck.getCompanies().add(dataMaesters);
+        lindaBruebeck.getCompanies().add(softwareMachine);
+
+        companyDao.save(softwareMachine);
+        companyDao.save(dataMaesters);
+        companyDao.save(greyMatter);
+
+        //When
+        List<Employee> kovalsky = employeeDao.findByLastName("Kovalsky");
+
+        //Then
+        try {
+            Assert.assertEquals(2, kovalsky.size());
+
+        } finally {
+            companyDao.deleteAll();
+        }
     }
 }
