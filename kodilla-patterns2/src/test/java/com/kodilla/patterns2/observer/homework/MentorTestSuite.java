@@ -7,21 +7,21 @@ import static org.junit.Assert.assertEquals;
 public class MentorTestSuite {
 
     @Test
-    public void testUpdate() {
+    public void testUpdateOneTaskList() {
         //Given
-        TaskList taskListOne = new TaskListOne();
-        TaskList taskListTwo = new TaskListTwo();
-        Mentor johnCollins = new JohnCollinsMentor();
-        Mentor marekMichalak = new MarekMichalakMentor();
-        taskListOne.registerMentor(johnCollins);
-        taskListTwo.registerMentor(marekMichalak);
-        taskListTwo.registerMentor(johnCollins);
+        TaskList taskListMirekJanik = new TaskList("taskListMirekJanik");
+        TaskList taskListMarekZbyszek = new TaskList("taskListMarekZbyszek");
+        Mentor johnCollins = new Mentor("johnCollins");
+        Mentor marekMichalak = new Mentor("marekMichalak");
+        taskListMirekJanik.registerMentor(johnCollins);
+        taskListMarekZbyszek.registerMentor(marekMichalak);
+        taskListMarekZbyszek.registerMentor(johnCollins);
         //When
-        taskListOne.addTask("Definition of variables - create new variables");
-        taskListOne.addTask("Difference between int and Integer");
-        taskListTwo.addTask("What are arrays");
-        taskListTwo.addTask("Can arrays be unbound");
-        taskListTwo.addTask("Arrays exam");
+        taskListMirekJanik.addTask("Definition of variables - create new variables");
+        taskListMirekJanik.addTask("Difference between int and Integer");
+        taskListMarekZbyszek.addTask("What are arrays");
+        taskListMarekZbyszek.addTask("Can arrays be unbound");
+        taskListMarekZbyszek.addTask("Arrays exam");
         //Then
         assertEquals(5, johnCollins.getUpdateCount());
         assertEquals(3, marekMichalak.getUpdateCount());
