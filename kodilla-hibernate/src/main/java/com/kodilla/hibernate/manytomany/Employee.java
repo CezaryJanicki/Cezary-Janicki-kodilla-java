@@ -10,6 +10,13 @@ import java.util.List;
         query = "FROM Employee WHERE LASTNAME = :NAME"
 )
 
+@NamedNativeQuery(
+        name = "Employee.findEmployeeByAnyCharacter",
+        query = "SELECT * FROM EMPLOYEES" +
+                " WHERE LASTNAME LIKE :SUBSTR",
+        resultClass = Employee.class
+)
+
 @Entity
 @Table(name = "EMPLOYEES")
 public final class Employee {

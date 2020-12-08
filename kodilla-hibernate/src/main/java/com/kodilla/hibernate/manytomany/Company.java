@@ -12,6 +12,13 @@ import java.util.List;
         resultClass = Company.class
 )
 
+@NamedNativeQuery(
+        name = "Company.findCompanyByAnyCharacter",
+        query = "SELECT * FROM COMPANIES" +
+                " WHERE COMPANY_NAME LIKE :SUBSTR",
+        resultClass = Company.class
+)
+
 @Entity
 @Table(name = "COMPANIES")
 public final class Company {
