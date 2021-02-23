@@ -1,4 +1,4 @@
-package com.koilla.patterns.builder.bigmac;
+package com.kodilla.patterns.builder.bigmac;
 
 import com.kodilla.patterns.builder.bigmac.Bigmac;
 import com.kodilla.patterns.builder.bigmac.Bun;

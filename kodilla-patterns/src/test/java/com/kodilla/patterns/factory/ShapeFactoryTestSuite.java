@@ -1,4 +1,4 @@
-package com.koilla.patterns.factory;
+package com.kodilla.patterns.factory;
 
 import com.kodilla.patterns.factory.Shape;
 import com.kodilla.patterns.factory.ShapeFactory;

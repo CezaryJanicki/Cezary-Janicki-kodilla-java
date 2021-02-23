@@ -1,4 +1,4 @@
-package com.koilla.patterns.builder.pizza;
+package com.kodilla.patterns.builder.pizza;
 
 import com.kodilla.patterns.builder.pizza.Pizza;
 import org.junit.Assert;

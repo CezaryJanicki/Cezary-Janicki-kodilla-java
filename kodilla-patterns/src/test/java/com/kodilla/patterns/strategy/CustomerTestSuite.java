@@ -1,4 +1,4 @@
-package com.koilla.patterns.strategy;
+package com.kodilla.patterns.strategy;
 
 import com.kodilla.patterns.strategy.CorporateCustomer;
 import com.kodilla.patterns.strategy.Customer;

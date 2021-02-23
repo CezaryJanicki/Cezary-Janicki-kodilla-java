@@ -1,4 +1,4 @@
-package com.koilla.patterns.factory.tasks;
+package com.kodilla.patterns.factory.tasks;
 
 import com.kodilla.patterns.factory.task.*;
 import org.junit.Assert;
