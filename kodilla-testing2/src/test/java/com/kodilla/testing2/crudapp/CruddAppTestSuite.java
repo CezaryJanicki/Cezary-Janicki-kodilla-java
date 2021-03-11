@@ -17,6 +17,7 @@ public class CruddAppTestSuite {
     private static final String BASE_URL = "https://cezaryjanicki.github.io";
     private WebDriver driver;
     private Random generator;
+    private String taskName = "";
 
     @BeforeEach
     public void initTests() {
@@ -35,7 +36,7 @@ public class CruddAppTestSuite {
         final String XPATH_TASK_NAME = "//form[contains(@action, \"createTask\")]/fieldset[1]/input";
         final String XPATH_TASK_CONTENT = "//form[contains(@action, \"createTask\")]/fieldset[2]/textarea";
         final String XPATH_ADD_BUTTON = "//form[contains(@action, \"createTask\")]/fieldset[3]/button";
-        String taskName = "Task number " + generator.nextInt(100000);
+        taskName = "Task number " + generator.nextInt(100000);
         String taskContent = taskName + " content";
 
         WebElement name = driver.findElement(By.xpath(XPATH_TASK_NAME));
@@ -105,7 +106,33 @@ public class CruddAppTestSuite {
     @Test
     public void shouldCreateTrelloCard() throws InterruptedException {
         String taskName = createCrudAppTestTask();
-        sendTestTaskToTrello(taskName);
-        assertTrue(checkTaskExistsInTrello(taskName));
+        //sendTestTaskToTrello(taskName);
+        //assertTrue(checkTaskExistsInTrello(taskName));
+        assertTrue(shouldDeleteTrelloCard(taskName));
+    }
+
+    @Test
+    public boolean shouldDeleteTrelloCard(String taskName) throws InterruptedException {
+
+        final String XPATH_TASK_BY_NAME = "//p[contains(@data-task-name-paragraph,\"" + taskName + "\")]";
+
+        driver.navigate().refresh();
+
+        Thread.sleep(4000);
+
+        while (!driver.findElement(By.xpath("//select[1]")).isDisplayed());
+
+        driver.findElements(By.xpath("//form[@class=\"datatable__row\"]")).stream()
+                .filter(anyForm ->
+                        anyForm.findElement(By.xpath(".//p[@class=\"datatable__field-value\"]"))
+                                .getText().equals(taskName))
+                .forEach(theForm -> {
+                    WebElement buttonDeleteCard = theForm.findElement(By.xpath(".//button[4]"));
+                    buttonDeleteCard.click();
+                });
+
+        boolean result = driver.findElements(By.xpath(XPATH_TASK_BY_NAME)).isEmpty();
+
+        return result;
     }
 }
