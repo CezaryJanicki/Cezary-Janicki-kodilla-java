@@ -6,15 +6,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import java.util.stream.*;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CruddAppTestSuite {
 
     private static final String BASE_URL = "https://cezaryjanicki.github.io";
+
     private WebDriver driver;
     private Random generator;
     private String taskName = "";
@@ -22,8 +23,10 @@ public class CruddAppTestSuite {
     @BeforeEach
     public void initTests() {
         driver = WebDriverConfig.getDriver(WebDriverConfig.CHROME);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(BASE_URL);
         generator = new Random();
+
     }
 
     @AfterEach
@@ -31,8 +34,7 @@ public class CruddAppTestSuite {
         driver.close();
     }
 
-    @Test
-    public String createCrudAppTestTask() throws InterruptedException {
+    private String createCrudAppTestTask() throws InterruptedException {
         final String XPATH_TASK_NAME = "//form[contains(@action, \"createTask\")]/fieldset[1]/input";
         final String XPATH_TASK_CONTENT = "//form[contains(@action, \"createTask\")]/fieldset[2]/textarea";
         final String XPATH_ADD_BUTTON = "//form[contains(@action, \"createTask\")]/fieldset[3]/button";
@@ -47,7 +49,6 @@ public class CruddAppTestSuite {
 
         WebElement addButton = driver.findElement(By.xpath(XPATH_ADD_BUTTON));
         addButton.click();
-        Thread.sleep(2000);
 
         return taskName;
     }
@@ -69,7 +70,6 @@ public class CruddAppTestSuite {
                     WebElement buttonCreateCard = theForm.findElement(By.xpath(".//button[contains(@class, \"card-creation\")]"));
                     buttonCreateCard.click();
                 });
-        Thread.sleep(5000);
     }
 
     private boolean checkTaskExistsInTrello(String taskName) throws InterruptedException {
@@ -106,33 +106,25 @@ public class CruddAppTestSuite {
     @Test
     public void shouldCreateTrelloCard() throws InterruptedException {
         String taskName = createCrudAppTestTask();
-        //sendTestTaskToTrello(taskName);
-        //assertTrue(checkTaskExistsInTrello(taskName));
-        assertTrue(shouldDeleteTrelloCard(taskName));
+        sendTestTaskToTrello(taskName);
+        assertTrue(checkTaskExistsInTrello(taskName));
+        deleteCard(taskName);
+        assertTrue(driver.findElements(By.xpath("//p[contains(@data-task-name-paragraph,\"" + taskName + "\")]")).isEmpty());
     }
 
-    @Test
-    public boolean shouldDeleteTrelloCard(String taskName) throws InterruptedException {
-
-        final String XPATH_TASK_BY_NAME = "//p[contains(@data-task-name-paragraph,\"" + taskName + "\")]";
+    private void deleteCard(String taskName) throws InterruptedException {
 
         driver.navigate().refresh();
 
-        Thread.sleep(4000);
-
-        while (!driver.findElement(By.xpath("//select[1]")).isDisplayed());
+        driver.findElement(By.xpath("//select[1]"));
 
         driver.findElements(By.xpath("//form[@class=\"datatable__row\"]")).stream()
                 .filter(anyForm ->
                         anyForm.findElement(By.xpath(".//p[@class=\"datatable__field-value\"]"))
                                 .getText().equals(taskName))
-                .forEach(theForm -> {
+                .findAny().ifPresent(theForm -> {
                     WebElement buttonDeleteCard = theForm.findElement(By.xpath(".//button[4]"));
                     buttonDeleteCard.click();
                 });
-
-        boolean result = driver.findElements(By.xpath(XPATH_TASK_BY_NAME)).isEmpty();
-
-        return result;
     }
 }
